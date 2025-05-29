@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import {
   addQuestion,
@@ -11,6 +12,7 @@ import Question from "./Question";
 import Edit from "./Edit";
 
 const Form = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const title = useSelector((state) => state.form.title);
   const description = useSelector((state) => state.form.desc);
@@ -46,6 +48,11 @@ const Form = () => {
 
   return (
     <div>
+      <div className="px-10 pt-10 w-full">
+        <button className="px-3 py-1.5 rounded-md bg-violet-500 hover:bg-violet-600 text-white cursor-pointer" onClick={() => navigate('/form-preview')}>
+          Preview Form
+        </button>
+      </div>
       <div className="w-3xl mx-auto min-h-screen py-10">
         <form
           className="w-full block mx-auto h-full px-6 md:px-0 overflow-x-hidden"
@@ -105,7 +112,8 @@ const Form = () => {
             {questions.length > 0 && (
               <div className="">
                 <button
-                  onClick={()=>console.log(formData)}
+                  onClick={() => console.log(formData)}
+                  type="button"
                   className="bg-violet-500 text-white px-6 py-3 rounded cursor-pointer"
                 >
                   Submit
